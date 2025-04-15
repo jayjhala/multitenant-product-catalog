@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "89ac8b14-7130-4648-b904-201975a5cc1f",
+		"name": "TenantTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8930837"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@yopmail.com\",\r\n  \"password\": \"12341234\",\r\n  \"tenantName\": \"Test\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test2@yopmail.com\",\r\n  \"password\": \"12341234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MWRiZjBmMS00NDQzLTQ2MjctYWJkYi01MjcxYTljMWM0ZjYiLCJlbWFpbCI6InRlc3QyQHlvcG1haWwuY29tIiwidGVuYW50SWQiOiJiNWFkMTYyNy1jNGVkLTRlMGQtODIwZS0xZmNiYjJhODA5YTYiLCJpYXQiOjE3NDQ2MzU1MDQsImV4cCI6MTc0NDcyMTkwNH0.6GIZEzmcjJH7T2qdnPMm4q-nYiXlAcPp-WBnSK6BkaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"4 Test Product\",\r\n    \"price\": 50,\r\n    \"description\": \"Test description\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/products/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"products",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MWRiZjBmMS00NDQzLTQ2MjctYWJkYi01MjcxYTljMWM0ZjYiLCJlbWFpbCI6InRlc3QyQHlvcG1haWwuY29tIiwidGVuYW50SWQiOiJiNWFkMTYyNy1jNGVkLTRlMGQtODIwZS0xZmNiYjJhODA5YTYiLCJpYXQiOjE3NDQ2MzU1MDQsImV4cCI6MTc0NDcyMTkwNH0.6GIZEzmcjJH7T2qdnPMm4q-nYiXlAcPp-WBnSK6BkaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/products/fetchAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"products",
+						"fetchAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

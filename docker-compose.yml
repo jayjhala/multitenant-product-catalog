@@ -1,0 +1,68 @@
+services:
+  auth-service:
+    build:
+      context: ./auth-service
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - app-network
+
+  product-service:
+    build:
+      context: ./product-service
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./product-service/.env
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - ./frontend/.env
+    depends_on:
+      - auth-service
+      - product-service
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "12341234"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
